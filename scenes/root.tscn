@@ -22,6 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_blxh3")
+expand_mode = 1
 
 [node name="MoonButton" type="Button" parent="."]
 layout_mode = 1
@@ -45,13 +46,40 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_1wuq4")
 script = ExtResource("3_bs586")
 
-[node name="StardustCounter" type="Label" parent="."]
+[node name="Resources" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 139.0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="StardustCounter" type="Label" parent="Resources"]
+layout_mode = 2
 text = "Stardust : <value>"
 vertical_alignment = 1
 
+[node name="Shop" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -283.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Star" type="HBoxContainer" parent="Shop"]
+layout_mode = 2
+
+[node name="StarCounter" type="Label" parent="Shop/Star"]
+layout_mode = 2
+text = "<value> Star"
+
+[node name="StarBuyButton" type="Button" parent="Shop/Star"]
+layout_mode = 2
+text = "Buy Star (<value> Stardust)"
+
 [connection signal="pressed" from="MoonButton" to="." method="OnMoonButtonPressed"]
+[connection signal="pressed" from="Shop/Star/StarBuyButton" to="." method="OnStarBuyButtonPressed"]
