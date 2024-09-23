@@ -10,3 +10,7 @@ script = ExtResource("1_12v7i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mflga")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

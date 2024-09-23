@@ -1,8 +1,7 @@
 using Godot;
 using System;
 
-public partial class Root : Control
-{
+public partial class Root : Control {
 	private Label stardustCounter;
 	private int stardust = 0;
 
@@ -57,13 +56,7 @@ public partial class Root : Control
 			UpdateStarCounter();
 			UpdateStarPrice();
 
-			// Add a new star sprite to the scene.
-			GetTree().Root.AddChild(GD.Load<PackedScene>("res://scenes/stars/medium_star.tscn").Instantiate());
-
-			// Sprite2D star = new Sprite2D();
-			// GetTree().Root.AddChild(star);
-			// star.Texture = GD.Load<Texture2D>("res://assets/medium_star.png");
-			// star.Position = new Vector2(100 + 50 * stars, 100);
+			AddChild(GD.Load<PackedScene>("res://scenes/stars/medium_star.tscn").Instantiate());
 		}
 	}
 }
