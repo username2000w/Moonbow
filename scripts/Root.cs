@@ -3,7 +3,7 @@ using System;
 
 public partial class Root : Control {
 	private Label stardustCounter;
-	private int stardust = 0;
+	private int stardust = 1000;
 
 	private Label starCounter;
 	private int stars = 0;
@@ -50,13 +50,20 @@ public partial class Root : Control {
 	}
 
 	public void OnStarBuyButtonPressed() {
+		string starType;
 		if (stardust >= starPrice) {
 			AddStardust(starPrice * -1);
 			stars++;
 			UpdateStarCounter();
 			UpdateStarPrice();
+			float rand = GD.Randf();
 
-			AddChild(GD.Load<PackedScene>("res://scenes/stars/medium_star.tscn").Instantiate());
+			if (rand <= 0.9f) {
+				starType = "small_star";
+			} else {
+				starType = "medium_star";
+			}
+			AddChild(GD.Load<PackedScene>("res://scenes/stars/"+starType+".tscn").Instantiate());
 		}
 	}
 }
