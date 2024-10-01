@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c42utcy3biihm"]
+[gd_scene load_steps=7 format=3 uid="uid://c42utcy3biihm"]
 
 [ext_resource type="Texture2D" uid="uid://bd7nhd2hvx0xa" path="res://assets/moon.png" id="1_1wuq4"]
 [ext_resource type="Script" path="res://scripts/Root.cs" id="1_q54q7"]
 [ext_resource type="Texture2D" uid="uid://bhnadwyhy0573" path="res://assets/background space.png" id="2_blxh3"]
 [ext_resource type="Script" path="res://scripts/MoonSprite.cs" id="3_bs586"]
 [ext_resource type="Script" path="res://scripts/shop/Shop.cs" id="5_2vebj"]
+[ext_resource type="Script" path="res://scripts/shop/OpenShopButton.cs" id="5_w5yik"]
 
 [node name="Root" type="Control"]
 layout_mode = 3
@@ -39,6 +40,8 @@ offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(48, 48)
+size_flags_horizontal = 6
+size_flags_vertical = 4
 flat = true
 
 [node name="Moon" type="Sprite2D" parent="MoonButton"]
@@ -47,44 +50,29 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("1_1wuq4")
 script = ExtResource("3_bs586")
 
-[node name="Resources" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 139.0
-grow_vertical = 2
-size_flags_vertical = 3
-
-[node name="StardustCounter" type="Label" parent="Resources"]
-layout_mode = 2
-text = "Stardust : <value>"
-vertical_alignment = 1
-
-[node name="ShopButton" type="Button" parent="."]
+[node name="OpenShopButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -47.0
+offset_left = -93.0
 offset_top = -15.5
 offset_bottom = 15.5
 grow_horizontal = 0
 grow_vertical = 2
 text = "Open Shop"
+script = ExtResource("5_w5yik")
 
 [node name="Shop" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -317.0
-offset_bottom = -327.0
+layout_mode = 2
+offset_left = 323.0
+offset_right = 640.0
+offset_bottom = 360.0
 grow_horizontal = 0
 grow_vertical = 2
-size_flags_vertical = 3
+size_flags_horizontal = 10
 script = ExtResource("5_2vebj")
 
 [node name="Star" type="HBoxContainer" parent="Shop"]
@@ -99,6 +87,28 @@ text = "<value> Star"
 layout_mode = 2
 text = "Buy Star (<value> Stardust)"
 
+[node name="ShopButton" type="Button" parent="Shop"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+text = "Close Shop"
+
+[node name="Resources" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 139.0
+grow_vertical = 2
+size_flags_vertical = 0
+
+[node name="StardustCounter" type="Label" parent="Resources"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Stardust : <value>"
+vertical_alignment = 1
+
 [connection signal="pressed" from="MoonButton" to="." method="OnMoonButtonPressed"]
-[connection signal="pressed" from="ShopButton" to="Shop" method="OnShopButtonPressed"]
+[connection signal="pressed" from="OpenShopButton" to="Shop" method="OnShopButtonPressed"]
+[connection signal="visibility_changed" from="Shop" to="OpenShopButton" method="OnShopVisibilityChanged"]
 [connection signal="pressed" from="Shop/Star/StarBuyButton" to="." method="OnStarBuyButtonPressed"]
+[connection signal="pressed" from="Shop/ShopButton" to="Shop" method="OnShopButtonPressed"]
